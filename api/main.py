@@ -33,7 +33,7 @@ def get_all_houses(db: Session = Depends(get_db)):
 # add house
 @app.post("/houses", response_model=schemas.HouseOut)
 def create_house(request: schemas.HouseModel, db: Session = Depends(get_db)):
-    new_house = models.Houses(price=request.price)
+    new_house = models.Houses(price=request.price, date=request.date, bedrooms=request.bedrooms)
     db.add(new_house)
     db.commit()
     db.refresh(new_house)
